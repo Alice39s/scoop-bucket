@@ -1,31 +1,39 @@
 {
-  "version": "0.2.5",
-  "description": "Concurrent traceroute that maps every hop on xmsl.dev IPMap",
-  "homepage": "https://github.com/Alice39s/xmtr",
-  "license": "MIT|Apache-2.0",
-  "notes": "Run xmtr from an Administrator terminal. Update it with scoop update rather than xmtr self update.",
-  "architecture": {
-    "64bit": {
-      "url": "https://github.com/Alice39s/xmtr/releases/download/v0.2.5/xmtr-x86_64-pc-windows-gnu.zip",
-      "hash": "ae589a34b4a2fa7c85af10e46c8be420d783cbb5553c46fa389961aee68eb98f"
-    },
-    "32bit": {
-      "url": "https://github.com/Alice39s/xmtr/releases/download/v0.2.5/xmtr-i686-pc-windows-gnu.zip",
-      "hash": "00a997ae3451d7cb399ee623020acf513abca78eb4d8c1f3db9617d0887aeeb8"
-    },
-    "arm64": {
-      "url": "https://github.com/Alice39s/xmtr/releases/download/v0.2.5/xmtr-aarch64-pc-windows-gnullvm.zip",
-      "hash": "439e5dff1c5d4b918020fa0438448cd049a652cecd36a40121f56a9ac39a5a6d"
-    }
-  },
-  "bin": "xmtr.exe",
-  "checkver": "github",
-  "autoupdate": {
+    "version": "0.2.5",
+    "description": "Concurrent traceroute that maps every hop on xmsl.dev IPMap",
+    "homepage": "https://github.com/Alice39s/xmtr",
+    "license": "MIT|Apache-2.0",
+    "notes": "Run xmtr from an Administrator terminal. Update it with scoop update rather than xmtr self update.",
     "architecture": {
-      "64bit": { "url": "https://github.com/Alice39s/xmtr/releases/download/v$version/xmtr-x86_64-pc-windows-gnu.zip" },
-      "32bit": { "url": "https://github.com/Alice39s/xmtr/releases/download/v$version/xmtr-i686-pc-windows-gnu.zip" },
-      "arm64": { "url": "https://github.com/Alice39s/xmtr/releases/download/v$version/xmtr-aarch64-pc-windows-gnullvm.zip" }
+        "64bit": {
+            "url": "https://github.com/Alice39s/xmtr/releases/download/v0.2.5/xmtr-x86_64-pc-windows-gnu.zip",
+            "hash": "ae589a34b4a2fa7c85af10e46c8be420d783cbb5553c46fa389961aee68eb98f"
+        },
+        "32bit": {
+            "url": "https://github.com/Alice39s/xmtr/releases/download/v0.2.5/xmtr-i686-pc-windows-gnu.zip",
+            "hash": "00a997ae3451d7cb399ee623020acf513abca78eb4d8c1f3db9617d0887aeeb8"
+        },
+        "arm64": {
+            "url": "https://github.com/Alice39s/xmtr/releases/download/v0.2.5/xmtr-aarch64-pc-windows-gnullvm.zip",
+            "hash": "439e5dff1c5d4b918020fa0438448cd049a652cecd36a40121f56a9ac39a5a6d"
+        }
     },
-    "hash": { "url": "$baseurl/SHA256SUMS" }
-  }
+    "bin": "xmtr.exe",
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/Alice39s/xmtr/releases/download/v$version/xmtr-x86_64-pc-windows-gnu.zip"
+            },
+            "32bit": {
+                "url": "https://github.com/Alice39s/xmtr/releases/download/v$version/xmtr-i686-pc-windows-gnu.zip"
+            },
+            "arm64": {
+                "url": "https://github.com/Alice39s/xmtr/releases/download/v$version/xmtr-aarch64-pc-windows-gnullvm.zip"
+            }
+        },
+        "hash": {
+            "url": "$baseurl/SHA256SUMS"
+        }
+    }
 }

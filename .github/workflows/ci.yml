@@ -1,0 +1,80 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        shell: [powershell, pwsh]
+    defaults:
+      run:
+        shell: ${{ matrix.shell }}
+    steps:
+      - name: Checkout Bucket
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Need at least 2 commits to properly gather changed files for linting
+          fetch-depth: 2
+          path: 'my_bucket'
+      - name: Checkout Scoop
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ScoopInstaller/Scoop
+          path: 'scoop_core'
+      - name: Install and cache test dependencies
+        uses: potatoqualitee/psmodulecache@9e4b63833c22c1768d648e115a9c849afdda22a5 # v6.3
+        with:
+          modules-to-cache: BuildHelpers, Pester
+          shell: ${{ matrix.shell }}
+      - name: Run tests
+        run: |
+          $env:SCOOP_HOME="$(Convert-Path '.\scoop_core')"
+          .\my_bucket\bin\test.ps1
+
+  # Installs every manifest for each architecture and runs it, including one trace to 127.0.0.1.
+  install:
+    name: Install ${{ matrix.arch }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: windows-latest, arch: 64bit }
+          - { os: windows-latest, arch: 32bit }
+          - { os: windows-11-arm, arch: arm64 }
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Checkout Bucket
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install Scoop
+        run: |
+          # Hosted runners run as Administrator, which the installer refuses without -RunAsAdmin.
+          Invoke-Expression "& {$(Invoke-RestMethod https://get.scoop.sh)} -RunAsAdmin"
+          Join-Path $HOME 'scoop\shims' | Add-Content -LiteralPath $env:GITHUB_PATH
+      - name: Install, run and uninstall
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          scoop bucket add local $PWD
+          Get-ChildItem bucket -Filter *.json | ForEach-Object {
+            $app = $_.BaseName
+            scoop install "local/$app" --arch ${{ matrix.arch }}
+            scoop info "local/$app"
+            & $app --version
+            if ($app -eq 'xmtr') {
+              xmtr --no-upload --no-rdns --max-rounds 2 --min-rounds 1 127.0.0.1
+            }
+            scoop uninstall $app
+          }
