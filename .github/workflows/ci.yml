@@ -67,11 +67,10 @@ jobs:
       - name: Install, run and uninstall
         run: |
           $PSNativeCommandUseErrorActionPreference = $true
-          scoop bucket add local $PWD
           Get-ChildItem bucket -Filter *.json | ForEach-Object {
             $app = $_.BaseName
-            scoop install "local/$app" --arch ${{ matrix.arch }}
-            scoop info "local/$app"
+            scoop install $_.FullName --arch ${{ matrix.arch }}
+            scoop info $app
             & $app --version
             if ($app -eq 'xmtr') {
               xmtr --no-upload --no-rdns --max-rounds 2 --min-rounds 1 127.0.0.1
