@@ -1,21 +1,21 @@
 {
-    "version": "0.4.0",
+    "version": "0.4.1",
     "description": "Concurrent traceroute that maps every hop on xmsl.dev IPMap",
     "homepage": "https://github.com/Alice39s/xmtr",
     "license": "MIT|Apache-2.0",
     "notes": "Run xmtr from an Administrator terminal. Update it with scoop update rather than xmtr self update.",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/Alice39s/xmtr/releases/download/v0.4.0/xmtr-x86_64-pc-windows-gnu.zip",
-            "hash": "9f6d8effb3247c4e64f43219024e78e0a49e15ec70144efaf8f7e573313d52e6"
+            "url": "https://github.com/Alice39s/xmtr/releases/download/v0.4.1/xmtr-x86_64-pc-windows-gnu.zip",
+            "hash": "13a096a25127c30a38a6aad7abefd216bf59059f00f6aead61c8cb71f3207c86"
         },
         "32bit": {
-            "url": "https://github.com/Alice39s/xmtr/releases/download/v0.4.0/xmtr-i686-pc-windows-gnu.zip",
-            "hash": "2b23d24594bb08fd820244e06296bd2b80620041774a5cdcae93e327bd10315d"
+            "url": "https://github.com/Alice39s/xmtr/releases/download/v0.4.1/xmtr-i686-pc-windows-gnu.zip",
+            "hash": "b05d117891ec5ce38fe4d7e7c02be6796bdeaf0712cab84d27ed84cdd05b92e5"
         },
         "arm64": {
-            "url": "https://github.com/Alice39s/xmtr/releases/download/v0.4.0/xmtr-aarch64-pc-windows-gnullvm.zip",
-            "hash": "b269fddc3586451770412934b0098554fca888c777b24b8f485c5acfc2846dfe"
+            "url": "https://github.com/Alice39s/xmtr/releases/download/v0.4.1/xmtr-aarch64-pc-windows-gnullvm.zip",
+            "hash": "254a56eda1dbc01282cf8dbc3a89d7a36fb790d1491f6507fe38d19078fc5ceb"
         }
     },
     "bin": "xmtr.exe",
